@@ -1,15 +1,31 @@
-@(message: String)
+@(projects: List[Project], todoTask: List[Task])
 
-@main("Welcome to Play") {
-
-    <script type='text/javascript' src='@routes.Assets.at("js/index.js")'></script>
-
-    <ul id="persons"></ul>
-    <form action="@routes.Application.addPerson()" method="post">
-        <input type="text" name="name" />
-        <button>Add Person</button>
-
+<html>
+<head>
+    <title>Zentasks</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-1.7.1.js")"></script>
+    </head>
+    <body>
+        <header>
+            <a href="@routes.Application.index" id="logo"><span>Zen</span>tasks</a>
+        </header>
+        <nav>
+            <h4 class="dashboard"><a href="#/">Dashboard</a></h4>
+            <ul id="projects">
+                @projects.groupBy(_.folder).map {
+                    case (group, projects) => {
+                        @views.html.projects.group(group, projects)
+                    }
+                }
+            </ul>
+        </nav>
+        <section id="main">
 
     </form>
+        </section>
+    </body>
+</html>
 
-}
+
+

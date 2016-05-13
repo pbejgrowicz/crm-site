@@ -1,6 +1,8 @@
 package controllers;
 
 import models.Person;
+import models.Project;
+import models.Task;
 import play.*;
 import play.db.ebean.Model;
 import play.mvc.*;
@@ -15,7 +17,10 @@ import static play.libs.Json.toJson;
 public class Application extends Controller {
 
     public static Result index() {
-        return ok(index.render("Crm-site"));
+        return ok(index.render(
+                Project.find.all(),
+                Task.find.all()
+        ));
     }
 
     public static Result addPerson() {
