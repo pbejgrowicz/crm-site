@@ -13,6 +13,8 @@ PUT     /projects/:project          controllers.Projects.rename(project: Long)
 GET     /login                  controllers.Login.index()
 POST    /login                  controllers.Login.authenticate()
 GET     /logout                 controllers.Application.logout()
+GET     /register               controllers.SignUp.index()
+POST    /register               controllers.SignUp.addNewUser()
 
 GET     /assets/javascripts/routes          controllers.Application.javascriptRoutes()
 

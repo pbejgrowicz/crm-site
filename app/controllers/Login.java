@@ -1,6 +1,7 @@
 package controllers;
 
 import models.User;
+import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -29,6 +30,16 @@ public class Login extends Controller {
 
     public static Result authenticate() {
         Form<LoginModel> form = loginForm.bindFromRequest();
+        DynamicForm requestData = Form.form().bindFromRequest();
+
+        if(requestData.get("register")!=null){
+            return redirect(routes.SignUp.index());
+        }
+
+        if(requestData.get("email")==null){
+            return redirect(routes.Login.index());
+        }
+
 
         if (form.hasErrors()) {
             return badRequest(views.html.login.render(form));
