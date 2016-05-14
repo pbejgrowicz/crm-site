@@ -4,23 +4,23 @@
 
 <header>
     <hgroup>
-        <h1>Dashboard</h1>
+        <h1>User list</h1>
     </hgroup>
 </header>
 
 <article  class="tasks">
 
-    @helper.form(routes.Application.redirectToUserList) {
-        @{
-            if(user.isSuperUser == true) {
+    @helper.form(routes.UserList.redirectToMainIndex) {
+    @{
+    if(user.isSuperUser == true) {
 
 
-        <p>Hello Admin!
-                <button type="submit">See Users</button>
-        </p>
+    <p>
+        <button type="submit">Go Back</button>
+    </p>
 
-          }
-        }
+    }
+    }
     }
 
 
@@ -36,6 +36,8 @@
             }
         </ul>
     </div>
+
+
     }
     }
 </article>

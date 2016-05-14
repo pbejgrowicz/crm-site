@@ -4,6 +4,7 @@
 
 # Home page
 GET     /                           controllers.Application.index()
+GET     /redirectToUserList         controllers.Application.redirectToUserList()
 
 POST    /projects                   controllers.Projects.add()
 POST    /projects/groups            controllers.Projects.addGroup()
@@ -15,6 +16,8 @@ POST    /login                  controllers.Login.authenticate()
 GET     /logout                 controllers.Application.logout()
 GET     /register               controllers.SignUp.index()
 POST    /register               controllers.SignUp.addNewUser()
+GET     /users                  controllers.UserList.index()
+GET     /                 controllers.UserList.redirectToMainIndex()
 
 GET     /assets/javascripts/routes          controllers.Application.javascriptRoutes()
 
