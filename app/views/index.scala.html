@@ -5,11 +5,20 @@
 <header>
     <hgroup>
         <h1>Dashboard</h1>
-        <h2>Tasks over all projects</h2>
     </hgroup>
 </header>
 
 <article  class="tasks">
+
+
+    @{
+        if(user.isSuperUser == true) {
+        <p>Hello Admin!</p>
+        }
+    }
+
+
+
     @todoTasks.groupBy(_.project).map {
     case (project, tasks) => {
     <div class="folder" data-folder-id="@project.id">

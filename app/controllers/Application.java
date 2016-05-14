@@ -49,11 +49,11 @@ public class Application extends Controller {
         response().setContentType("text/javascript");
         return ok(
                 Routes.javascriptRouter("jsRoutes",
-                controllers.routes.javascript.Projects.add(),
-                        controllers.routes.javascript.Projects.delete(),
-                        controllers.routes.javascript.Projects.rename(),
-                        controllers.routes.javascript.Projects.addGroup(),
-                        controllers.routes.javascript.Tasks.add()
+                routes.javascript.Projects.add(),
+                        routes.javascript.Projects.delete(),
+                        routes.javascript.Projects.rename(),
+                        routes.javascript.Projects.addGroup(),
+                        routes.javascript.Tasks.add()
                 )
         );
     }

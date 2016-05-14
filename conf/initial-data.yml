@@ -1,9 +1,14 @@
 # Users
 
 - &bob !!models.User
-    email:      bob@example.com
-    name:       Bob
-    password:   secret
+    email:        bob@example.com
+    name:         Bob
+    password:     secret
+
+- &admin !!models.User
+    email:        admin@volanto.com
+    name:         Admin
+    password:     root
 
 - &jane !!models.User
     email:      jane@example.com

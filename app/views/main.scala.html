@@ -16,7 +16,7 @@
         <header>
             <a href="@routes.Application.index" id="logo"><span>Zen</span>tasks</a>
             <dl id="user">
-                <dt>@user.name <span>(@user.email)</span></dt>
+                <dt>@user.name   @user.isSuperUser <span>(@user.email)</span></dt>
                 <dd>
                     <a href="@routes.Application.logout()">Logout</a>
                 </dd>
