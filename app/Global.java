@@ -1,20 +1,16 @@
-import play.Application;
-import play.GlobalSettings;
-import play.libs.Yaml;
+import play.*;
+import play.libs.*;
 import com.avaje.ebean.Ebean;
-import java.util.*;
 import models.*;
+import java.util.*;
 
-/**
- * Created by pb on 13.05.2016.
- */
 public class Global extends GlobalSettings {
     @Override
     public void onStart(Application app) {
-        //Check if the datebase is empty
-        if(User.find.findRowCount() == 0) {
+        // Check if the database is empty
+        if (User.find.findRowCount() == 0) {
             Ebean.save((List) Yaml.load("initial-data.yml"));
         }
-    }
 
+    }
 }

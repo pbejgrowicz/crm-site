@@ -4,6 +4,7 @@ import models.Person;
 import models.Project;
 import models.Task;
 import models.User;
+import play.Routes;
 import play.db.ebean.Model;
 import play.mvc.*;
 import play.data.*;
@@ -42,6 +43,19 @@ public class Application extends Controller {
         List<Person> persons = new Model.Finder(String.class, Person.class).all();
         return ok(toJson(persons));
 
+    }
+
+    public static Result javascriptRoutes() {
+        response().setContentType("text/javascript");
+        return ok(
+                Routes.javascriptRouter("jsRoutes",
+                controllers.routes.javascript.Projects.add(),
+                        controllers.routes.javascript.Projects.delete(),
+                        controllers.routes.javascript.Projects.rename(),
+                        controllers.routes.javascript.Projects.addGroup(),
+                        controllers.routes.javascript.Tasks.add()
+                )
+        );
     }
 
 

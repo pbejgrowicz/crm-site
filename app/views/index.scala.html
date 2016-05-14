@@ -14,7 +14,7 @@
     case (project, tasks) => {
     <div class="folder" data-folder-id="@project.id">
         <header>
-            <h3>@project.name</h3>
+            <h3><a href="#@routes.Tasks.index(project.id)">@project.name</a></h3>
         </header>
         <ul class="list">
             @tasks.map { task =>
