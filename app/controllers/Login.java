@@ -41,7 +41,7 @@ public class Login extends Controller {
         }
 
 
-        if (form.hasErrors()) {
+        if (form.hasErrors() || form.get().email.isEmpty() || form.get().password.isEmpty()) {
             return badRequest(views.html.login.render(form));
         } else {
             session().clear();

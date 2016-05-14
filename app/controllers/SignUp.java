@@ -31,7 +31,7 @@ public class SignUp extends Controller {
             return redirect(routes.Application.index());
         }
 
-        if (form.hasErrors()) {
+        if (form.hasErrors() || form.get().email.isEmpty() || form.get().name.isEmpty() || form.get().password.isEmpty()) {
             return badRequest(views.html.register.render(form));
         } else {
             User user;
