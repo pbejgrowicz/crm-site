@@ -9,7 +9,9 @@ POST    /person                     controllers.Application.addPerson()
 
 GET     /persons                    controllers.Application.getPersons()
 
-GET     /login                      controllers.Application.login()
+GET     /login                  controllers.Login.index()
+POST    /login                  controllers.Login.authenticate()
+GET     /logout                 controllers.Application.logout()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

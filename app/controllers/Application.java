@@ -3,10 +3,11 @@ package controllers;
 import models.Person;
 import models.Project;
 import models.Task;
-import play.*;
+import models.User;
 import play.db.ebean.Model;
 import play.mvc.*;
-import play.data.Form;
+import play.data.*;
+import play.mvc.Security;
 
 import views.html.*;
 
@@ -16,11 +17,19 @@ import static play.libs.Json.toJson;
 
 public class Application extends Controller {
 
+
+    @Security.Authenticated(Secured.class)
     public static Result index() {
-        return ok(index.render(
-                Project.find.all(),
-                Task.find.all()
-        ));
+        return ok(views.html.index.render(Project.findInvolving(request().username()),
+                Task.findTodoInvolving(request().username()),
+                User.find.byId(request().username())));
+
+    }
+
+    public static Result logout() {
+        session().clear();
+        flash("success", "You've been logged out");
+        return redirect(routes.Login.index());
     }
 
     public static Result addPerson() {
@@ -33,16 +42,6 @@ public class Application extends Controller {
         List<Person> persons = new Model.Finder(String.class, Person.class).all();
         return ok(toJson(persons));
 
-    }
-
-    public static Result login() {
-        //return ok(login.render());
-        return ok();
-    }
-
-    public static class Login {
-        public String email;
-        public String password;
     }
 
 
