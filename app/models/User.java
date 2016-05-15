@@ -3,6 +3,7 @@ package models;
 import play.db.ebean.Model;
 import com.avaje.ebean.*;
 import javax.persistence.*;
+import java.util.List;
 
 
 /**
@@ -30,6 +31,10 @@ public class User extends Model {
 
     public static User authenticate(String email, String password) {
         return find.where().eq("email", email).eq("password", password).findUnique();
+    }
+
+    public static List<User> returnListOfAllUsers() {
+        return User.find.where().findList();
     }
 
 

@@ -1,20 +1,11 @@
 package controllers;
 
-import models.Person;
 import models.Project;
 import models.Task;
 import models.User;
 import play.Routes;
-import play.db.ebean.Model;
 import play.mvc.*;
-import play.data.*;
 import play.mvc.Security;
-
-import views.html.*;
-
-import java.util.List;
-
-import static play.libs.Json.toJson;
 
 public class Application extends Controller {
 
@@ -33,17 +24,6 @@ public class Application extends Controller {
         return redirect(routes.Login.index());
     }
 
-    public static Result addPerson() {
-        Person person = Form.form(Person.class).bindFromRequest().get();
-        person.save();
-        return redirect(routes.Application.index());
-    }
-
-    public static Result getPersons() {
-        List<Person> persons = new Model.Finder(String.class, Person.class).all();
-        return ok(toJson(persons));
-
-    }
 
     public static Result redirectToUserList() {
         return redirect(routes.UserList.index());
