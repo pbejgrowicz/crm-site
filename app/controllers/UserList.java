@@ -1,7 +1,6 @@
 package controllers;
 
-import models.Project;
-import models.Task;
+import models.Contact;
 import models.User;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -15,15 +14,16 @@ public class UserList extends Controller{
     @Security.Authenticated(Secured.class)
     public static Result index() {
         if (User.find.byId(request().username()).isSuperUser == true)
-        return ok(views.html.users.render(Project.findInvolving(request().username()),
-                Task.findTodoInvolving(request().username()),
+        return ok(views.html.users.render(
+
                 User.find.byId(request().username()),
                 User.returnListOfAllUsers())
         );
         else
-            return ok(views.html.index.render(Project.findInvolving(request().username()),
-                Task.findTodoInvolving(request().username()),
-                User.find.byId(request().username())));
+            return ok(views.html.index.render(
+                User.find.byId(request().username()),
+                    Contact.returnListOfAllContacts())
+                );
 
     }
 

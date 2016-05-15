@@ -6,10 +6,6 @@
 GET     /                           controllers.Application.index()
 GET     /redirectToUserList         controllers.Application.redirectToUserList()
 
-POST    /projects                   controllers.Projects.add()
-POST    /projects/groups            controllers.Projects.addGroup()
-DELETE  /projects/:project          controllers.Projects.delete(project: Long)
-PUT     /projects/:project          controllers.Projects.rename(project: Long)
 
 GET     /login                  controllers.Login.index()
 POST    /login                  controllers.Login.authenticate()
@@ -19,10 +15,14 @@ POST    /register               controllers.SignUp.addNewUser()
 GET     /users                  controllers.UserList.index()
 GET     /                 controllers.UserList.redirectToMainIndex()
 
-GET     /assets/javascripts/routes          controllers.Application.javascriptRoutes()
 
-GET     /projects/:project/tasks    controllers.Tasks.index(project: Long)
-POST    /projects/:project/tasks    controllers.Tasks.add(project: Long, folder: String)
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
+
+
+GET     /contacts/new              controllers.Application.create()
+POST    /contacts                  controllers.Application.save()
+GET     /contacts/:id              controllers.Application.edit(id:Long)
+POST    /contacts/:id              controllers.Application.update(id:Long)

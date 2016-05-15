@@ -29,7 +29,7 @@ $(".options dt, .users dt").live "click", (e) ->
 # --------------------------------- EDIT IN PLACE
 $.fn.editInPlace = (method, options...) ->
     this.each ->
-        methods =
+        methods = 
             # public methods
             init: (options) ->
                 valid = (e) =>
@@ -319,7 +319,7 @@ class TaskFolder extends Backbone.View
             data:
                 title: $("input[name=taskBody]", form).val()
                 dueDate: $("input[name=dueDate]", form).val()
-                assignedTo:
+                assignedTo: 
                     email: $("input[name=assignedTo]", form).val()
             success: (tpl) ->
                 newTask = new TaskItem(el: $(tpl), folder: @)

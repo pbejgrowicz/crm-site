@@ -20,10 +20,5 @@ public class Secured extends Security.Authenticator {
         return redirect(routes.Login.index());
     }
 
-    public static boolean isMemberOf(Long project) {
-        return Project.isMember(
-                project,
-                Context.current().request().username()
-        );
-    }
+
 }

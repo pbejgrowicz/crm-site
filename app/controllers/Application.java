@@ -1,20 +1,39 @@
 package controllers;
 
-import models.Project;
-import models.Task;
+import models.Contact;
 import models.User;
 import play.Routes;
+import static play.data.Form.*;
+
+import play.data.Form;
+import play.db.ebean.Model;
 import play.mvc.*;
-import play.mvc.Security;
+
+import views.html.*;
+
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import play.api.libs.json.*;
 
 public class Application extends Controller {
 
 
     @Security.Authenticated(Secured.class)
     public static Result index() {
-        return ok(views.html.index.render(Project.findInvolving(request().username()),
-                Task.findTodoInvolving(request().username()),
-                User.find.byId(request().username())));
+        List<Contact> contacts = Contact.returnListOfAllContacts();
+
+        //TODO: Sort contacts by lastname
+        Collections.sort(contacts, new Comparator<Contact>() {
+            public int compare(Contact c1, Contact c2) {
+                return c1.lastname.compareTo(c2.lastname);
+            }
+        });
+
+        return ok(views.html.index.render(
+                User.find.byId(request().username()),
+                contacts)
+        );
 
     }
 
@@ -29,18 +48,45 @@ public class Application extends Controller {
         return redirect(routes.UserList.index());
     }
 
-    public static Result javascriptRoutes() {
-        response().setContentType("text/javascript");
+    @Security.Authenticated(Secured.class)
+    public static Result edit(Long id) {
+        Form<Contact> contactForm = form(Contact.class).fill(Contact.find.byId(id));
+        return ok(views.html.editForm.render(id, contactForm, User.find.byId(request().username())));
+    }
+
+    public static Result update(Long id) {
+        Form<Contact> contactForm = form(Contact.class).bindFromRequest();
+        if(contactForm.hasErrors()) {
+            return badRequest(editForm.render(id, contactForm, User.find.byId(request().username())));
+        }
+        contactForm.get().update(id);
+        flash("success", "Computer " + contactForm.get().lastname + " " + contactForm.get().lastname + " has been updated");
+        return redirect(routes.Application.index());
+    }
+
+
+
+    @Security.Authenticated(Secured.class)
+    public static Result create() {
+        Form<Contact> contactForm = form(Contact.class);
         return ok(
-                Routes.javascriptRouter("jsRoutes",
-                routes.javascript.Projects.add(),
-                        routes.javascript.Projects.delete(),
-                        routes.javascript.Projects.rename(),
-                        routes.javascript.Projects.addGroup(),
-                        routes.javascript.Tasks.add()
-                )
+                views.html.createForm.render(contactForm, User.find.byId(request().username()))
+
         );
     }
+
+    public static Result save() {
+        Form<Contact> contactForm = form(Contact.class).bindFromRequest();
+        if(contactForm.hasErrors()) {
+            return badRequest(views.html.createForm.render(contactForm, User.find.byId(request().username())));
+        }
+        contactForm.get().save();
+        flash("success", "Computer " + contactForm.get().firstname +" " + contactForm.get().lastname + " has been created");
+        return redirect(routes.Application.index());
+    }
+
+
+
 
 
 }
