@@ -1,0 +1,40 @@
+# Users
+
+- &bob !!models.User
+    email:        bob@example.com
+    name:         Bob
+    password:     secret
+    isSuperUser:  false
+
+- &admin !!models.User
+    email:        admin@volanto.com
+    name:         Admin
+    password:     root
+    isSuperUser:  true
+
+- &jane !!models.User
+    email:      jane@example.com
+    name:       Jane
+    password:   secret
+    isSuperUser:  false
+
+- &jeff !!models.User
+    email:      jeff@example.com
+    name:       Jeff
+    password:   secret
+    isSuperUser:  false
+
+
+#Contacts
+
+
+-   &test !!models.Contact
+    firstname:      test
+    lastname:       test2
+    number:         123456789
+    city:           Gdansk
+    company:        Apple
+
+
+
+    

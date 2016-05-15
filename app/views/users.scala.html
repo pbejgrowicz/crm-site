@@ -1,0 +1,60 @@
+@(user: User, listUsers: List[User])
+
+@main(user) {
+
+<header>
+    <hgroup>
+        <h1>User list</h1>
+    </hgroup>
+</header>
+
+<article  class="tasks">
+
+    @helper.form(routes.UserList.redirectToMainIndex) {
+        @{
+            if(user.isSuperUser == true) {
+
+
+            <p>
+                <button type="submit">Go Back</button>
+            </p>
+
+            }
+        }
+    }
+
+
+    @listUsers.groupBy(_.email).map {
+    case (user, listUsers) => {
+    <div class="folder" data-folder-id="@user">
+        <header>
+            <h3>@user</h3>
+        </header>
+        <ul class="list">
+            @listUsers.groupBy(_.name).map {
+                    case (name, listUsers) => {
+                        Name: @name
+                    }
+                }
+                <br>
+                @listUsers.groupBy(_.email).map {
+                    case (name, listUsers) => {
+                    Email: @name
+                    }
+                }
+                <br>
+                @listUsers.groupBy(_.isSuperUser).map {
+                case (name, listUsers) => {
+                Root: @name
+                }
+            }
+            <br>
+        </ul>
+    </div>
+    }
+    }
+
+
+</article>
+
+}

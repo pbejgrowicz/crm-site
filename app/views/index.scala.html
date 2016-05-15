@@ -1,0 +1,74 @@
+@(user: User, listContacts: List[Contact])
+
+@main(user) {
+
+<header>
+    <hgroup>
+        <h1>Dashboard</h1>
+    </hgroup>
+</header>
+
+<article  class="tasks">
+
+    @helper.form(routes.Application.redirectToUserList) {
+        @{
+            if(user.isSuperUser == true) {
+
+
+        <p>Hello Admin!
+                <button type="submit">See Users</button>
+        </p>
+
+          }
+        }
+    }
+    <br>
+    <div id ="actions">
+        <a class="btn success" id="add" href="@routes.Application.create()">Add a new contact</a>
+    </div>
+
+    @listContacts.groupBy(_.id).map {
+    case (id, listContacts) => {
+    <div class="folder" data-folder-id="@user">
+        <header>
+            <h3><a href="@routes.Application.edit(id)">Edit contact</a></h3>
+        </header>
+        <ul class="list">
+            @listContacts.groupBy(_.firstname).map {
+            case (firstname, listContacts) => {
+            Firstname: @firstname
+            }
+            }
+            <br>
+            @listContacts.groupBy(_.lastname).map {
+            case (lastname, listContacts) => {
+            Lastname: @lastname
+            }
+            }
+            <br>
+            @listContacts.groupBy(_.number).map {
+            case (number, listContacts) => {
+            Phone Number: @number
+            }
+            }
+            <br>
+            @listContacts.groupBy(_.city).map {
+            case (city, listContacts) => {
+            City: @city
+            }
+            }
+            <br>
+            @listContacts.groupBy(_.company).map {
+            case (company, listContacts) => {
+            Company: @company
+            }
+            }
+            <br>
+        </ul>
+    </div>
+    }
+    }
+
+</article>
+
+}
