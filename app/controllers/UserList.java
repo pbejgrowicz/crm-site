@@ -14,11 +14,16 @@ public class UserList extends Controller{
 
     @Security.Authenticated(Secured.class)
     public static Result index() {
+        if (User.find.byId(request().username()).isSuperUser == true)
         return ok(views.html.users.render(Project.findInvolving(request().username()),
                 Task.findTodoInvolving(request().username()),
                 User.find.byId(request().username()),
                 User.returnListOfAllUsers())
         );
+        else
+            return ok(views.html.index.render(Project.findInvolving(request().username()),
+                Task.findTodoInvolving(request().username()),
+                User.find.byId(request().username())));
 
     }
 

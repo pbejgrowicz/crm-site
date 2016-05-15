@@ -18,7 +18,7 @@ public class User extends Model {
     public String email;
     public String name;
     public String password;
-    public Boolean isSuperUser;
+    public Boolean isSuperUser = false;
 
     public User(String email, String name, String password) {
         this.email = email;

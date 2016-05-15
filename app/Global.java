@@ -11,9 +11,8 @@ public class Global extends GlobalSettings {
         if (User.find.findRowCount() == 0) {
             Ebean.save((List) Yaml.load("initial-data.yml"));
         }
-        //Set SuperUser as admin
-        User user = User.find.where().eq("name", "Admin").findUnique();
-        user.isSuperUser = true;
-        user.save();
+      
+
+
     }
 }
