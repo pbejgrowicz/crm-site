@@ -75,13 +75,22 @@ public class Application extends Controller {
         );
     }
 
-    public static Result save() {
+    public static Result saveContact(String email) {
         Form<Contact> contactForm = form(Contact.class).bindFromRequest();
         if(contactForm.hasErrors()) {
             return badRequest(views.html.createForm.render(contactForm, User.find.byId(request().username())));
         }
+
+        contactForm.get().userEmail = User.find.where().eq("email", email).findUnique().email; //Set contact to distinct User
         contactForm.get().save();
-        flash("success", "Computer " + contactForm.get().firstname +" " + contactForm.get().lastname + " has been created");
+
+        flash("success", "Contact " + contactForm.get().firstname +" " + contactForm.get().lastname + " has been created");
+        return redirect(routes.Application.index());
+    }
+
+    public static Result delete(Long id) {
+        Contact.find.ref(id).delete();
+        flash("success", "Computer has been deleted");
         return redirect(routes.Application.index());
     }
 

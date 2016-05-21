@@ -10,6 +10,7 @@ create table contact (
   number                    varchar(255),
   city                      varchar(255),
   company                   varchar(255),
+  user_email                varchar(255),
   constraint pk_contact primary key (id))
 ;
 

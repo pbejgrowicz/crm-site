@@ -23,6 +23,7 @@ GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
 
 GET     /contacts/new              controllers.Application.create()
-POST    /contacts                  controllers.Application.save()
+POST    /contacts                  controllers.Application.saveContact(email:String)
 GET     /contacts/:id              controllers.Application.edit(id:Long)
 POST    /contacts/:id              controllers.Application.update(id:Long)
+POST    /contacts/:id/delete       controllers.Application.delete(id:Long)

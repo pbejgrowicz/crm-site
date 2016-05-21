@@ -31,6 +31,9 @@ public class Contact extends Model{
 
     public String company;
 
+
+    public String userEmail;
+
    public static Finder<Long, Contact> find = new Finder<Long, Contact>(Long.class, Contact.class);
 
     public static List<Contact> returnListOfAllContacts() {
