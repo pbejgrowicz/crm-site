@@ -2,14 +2,34 @@
 
 <html>
 <head>
-    <title>Zentasks</title>
+    <title>Log in!</title>
     <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
     <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/login.css")">
 </head>
 <body>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1067710786636697',
+      xfbml      : true,
+      version    : 'v2.6'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
 <header>
-    <a href="@routes.Application.index" id="logo"><span>Zen</span>tasks</a>
+    <a href="@routes.Application.index" id="logo"><span>CRM</span>site</a>
 </header>
+
+
+
 
 @helper.form(routes.Login.authenticate) {
 <h1>Sign in</h1>
@@ -39,6 +59,12 @@
 <p>
     <button type="submit" name="register" value="register">Sign Up!</button>
 </p>
+<div
+        class="fb-like"
+        data-share="true"
+        data-width="450"
+        data-show-faces="true">
+</div>
 }
 
 </body>

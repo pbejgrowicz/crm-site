@@ -8,7 +8,7 @@ create table contact (
   firstname                 varchar(255),
   lastname                  varchar(255),
   number                    varchar(255),
-  city                      varchar(255),
+  email                     varchar(255),
   company                   varchar(255),
   user_email                varchar(255),
   constraint pk_contact primary key (id))

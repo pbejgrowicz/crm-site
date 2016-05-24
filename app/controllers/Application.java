@@ -94,6 +94,29 @@ public class Application extends Controller {
         return redirect(routes.Application.index());
     }
 
+    @Security.Authenticated(Secured.class)
+    public static Result seeProfile() {
+        return ok(views.html.profilePage.render(User.find.byId(request().username())));
+    }
+
+    @Security.Authenticated(Secured.class)
+    public static Result editProfile(String email) {
+        Form<User> userForm = form(User.class).fill(User.find.byId(email));
+        return ok(views.html.editProfilePage.render(email, userForm, User.find.byId(request().username())));
+    }
+
+    public static Result updateProfile(String id) {
+        Form<User> userForm = form(User.class).bindFromRequest();
+
+        if(userForm.hasErrors()) {
+            return badRequest(editProfilePage.render(id, userForm, User.find.byId(request().username())));
+        }
+        //email update dont work because email is ID
+        userForm.get().update();
+        flash("success", "Your profile has been updated");
+        return redirect(routes.Application.seeProfile());
+    }
+
 
 
 

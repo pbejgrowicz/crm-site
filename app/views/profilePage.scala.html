@@ -1,0 +1,25 @@
+@(user: User)
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
+
+@main(user) {
+
+<h1>Your profile page</h1>
+<br> <br>
+
+<div class="folder">
+    <h3><a href="@routes.Application.editProfile(user.email)">Edit:</a></h3>
+    <p>   <h3>@user.email</h3>
+    <ul class="list">
+        <h2>@user.name</h2>
+    </ul></p>
+</div>
+
+<br> <br> <br>
+<div class="actions">
+    <a href="@routes.Application.index()" class="btn">Go back to home page</a>
+</div>
+
+}

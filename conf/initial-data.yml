@@ -32,7 +32,7 @@
     firstname:      test
     lastname:       test2
     number:         123456789
-    city:           Gdansk
+    email:          test@test.com
     company:        Apple
     userEmail:      bob@example.com
 

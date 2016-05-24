@@ -57,9 +57,9 @@
                             }
                             }
                             <br>
-                            @listContacts.groupBy(_.city).map {
-                            case (city, listContacts) => {
-                            City: @city
+                            @listContacts.groupBy(_.email).map {
+                            case (email, listContacts) => {
+                            Email: @email
                             }
                             }
                             <br>

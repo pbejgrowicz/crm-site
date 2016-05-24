@@ -26,7 +26,7 @@ public class Contact extends Model{
     public String number;
 
 
-    public String city;
+    public String email;
 
 
     public String company;

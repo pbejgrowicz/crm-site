@@ -1,0 +1,30 @@
+@(id: String, userForm: Form[User], user: User)
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
+
+@main(user) {
+
+<h1>Edit your profile</h1>
+
+@form(routes.Application.updateProfile(user.email)) {
+
+    <fieldset>
+
+        @inputText(userForm("name"), '_label -> "Name")
+        @inputText(userForm("email"), '_label -> "Email")
+        @inputText(userForm("password"), '_label -> "Password")
+
+    </fieldset>
+
+    <div class="actions">
+        <input type="submit" value="Save" class="btn primary"> or
+        <a href="@routes.Application.seeProfile()" class="btn">Cancel</a>
+    </div>
+
+}
+
+
+
+}
